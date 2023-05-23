@@ -1,18 +1,26 @@
 import { useState } from "react";
 
 const TodoForm = () => {
-
+     //objeto, se iniciatiza aca y se cativa con los "todos"
     const [todo, setTodo] = useState({
 
-        todoNombre: "",
-        todoDescription: "",
-        todoEstado: "pendiente",
+        title: "",
+        description: "",
+        state: "pendiente",
+        priority: true,
 
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(todo.title, todo.description, todo.state);
+        // console.log(todo.title, todo.description, todo.state);
+        console.log(todo.title, todo.description, todo.state, todo.priority);
+    };
+
+    const handleChange = (e) => {
+
+        
+
     };
 
     return (
@@ -23,31 +31,39 @@ const TodoForm = () => {
                 type="text"
                 placeholder="Ingrese un TODO"
                 className="form-control mb-2"
-                name="todoNombre"
-                value={todo.todoNombre}
-                onChange={(e) => setTodo({...todo, todoNombre: e.target.value})}
-             
+                name="title"
+                value={todo.title}
+                onChange={(e) => setTodo({...todo, title: e.target.value})}
          />
            
             <textarea
                  type="text"
                  className="form-control mb-2"
                  placeholder="ingrese TODO descripcion"
-                 name="todoDescription"
+                 name="description"
                  value={todo.description}
-                 onChange={(e) => setTodo({...todo, todoDescription: e.target.value})}
-             
+                 onChange={(e) => setTodo({...todo, description: e.target.value})}
             />
-
             
+            <div className="form-check mb-2">
+            <input 
+                type="checkbox"
+                name="priority" 
+                className="form-check-input " 
+                id="inputCheck" 
+                checked= {todo.priority}
+                onChange={(e) => setTodo({... todo,  priority :e.target.checked})}
+            />
+          
 
-
+            <label className="form-check-label" htmlFor="inputCheck" >Dar prioridad</label>
+            </div>
             
             <select 
                 className="form-select mb-2" 
-                name="todoEstado"
-                value={todo.todoEstado}
-                onChange={(e) => setTodo({... todo, todoState :e.target.value})}
+                name="state"
+                value={todo.state}
+                onChange={(e) => setTodo({... todo, state :e.target.value})}
                >
 
                 <option value="pendiente">pendiente</option>
