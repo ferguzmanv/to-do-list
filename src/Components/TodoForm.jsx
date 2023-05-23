@@ -54,7 +54,7 @@ const TodoForm = () => {
                 <option value="completado">completado</option>
             </select>
             <button type="submit" className="btn btn-primary">
-                 Procesar
+                 Aceptar
                 </button>
            </form> 
         </div>
