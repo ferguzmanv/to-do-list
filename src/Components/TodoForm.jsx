@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { useState } from "react";
 
 const TodoForm = () => {
@@ -11,15 +12,40 @@ const TodoForm = () => {
 
     });
 
+    const {title, description, state, priority} = todo;
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(title.trim() === ''|| description.trim() === ''){
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+                
+              })
+
+        }
+
+
+
         // console.log(todo.title, todo.description, todo.state);
         console.log(todo.title, todo.description, todo.state, todo.priority);
     };
 
-    const handleChange = (e) => {
+    const handleChange = e => {
+        // console.log(e.target.value)
+        // console.log(e.target.name)
+        const {name,type,checked,value} = e.target
+      
+        setTodo({
+            ...todo,
+            [name]: type === "checkbox" ? checked : value,
 
-        
+        });
+
+        // validar datos
+        if (!title.trim()) return console.log("llena este campo")
 
     };
 
@@ -33,7 +59,7 @@ const TodoForm = () => {
                 className="form-control mb-2"
                 name="title"
                 value={todo.title}
-                onChange={(e) => setTodo({...todo, title: e.target.value})}
+                onChange={handleChange}
          />
            
             <textarea
@@ -42,28 +68,36 @@ const TodoForm = () => {
                  placeholder="ingrese TODO descripcion"
                  name="description"
                  value={todo.description}
-                 onChange={(e) => setTodo({...todo, description: e.target.value})}
+                 onChange={handleChange}
             />
             
+
+
+
             <div className="form-check mb-2">
+            
             <input 
                 type="checkbox"
                 name="priority" 
                 className="form-check-input " 
                 id="inputCheck" 
                 checked= {todo.priority}
-                onChange={(e) => setTodo({... todo,  priority :e.target.checked})}
+                 onChange={(e)=> setTodo({...todo, priority:e.target.checked})}
             />
-          
 
-            <label className="form-check-label" htmlFor="inputCheck" >Dar prioridad</label>
+            <label 
+                className="form-check-label" 
+                htmlFor="inputCheck" >Dar prioridad</label>
             </div>
             
+
+
+
             <select 
                 className="form-select mb-2" 
                 name="state"
                 value={todo.state}
-                onChange={(e) => setTodo({... todo, state :e.target.value})}
+                onChange={handleChange}
                >
 
                 <option value="pendiente">pendiente</option>

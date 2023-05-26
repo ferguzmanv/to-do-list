@@ -37,8 +37,8 @@ const App = () =>{
   return (
 
       < >
-      <div className="Container">
-      <h1>To Do List</h1>
+      <div className="container mb-2">
+      <h1 className="my-5">To Do List</h1>
       <TodoForm />
       <Todos todos = {todos} />
       </div>
