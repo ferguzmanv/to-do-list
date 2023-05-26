@@ -45,6 +45,7 @@ const App = () =>{
       <h1 className="my-5">To Do List</h1>
       <TodoForm addTodo ={addTodo} />
       <Todos todos = {todos} />
+    
       </div>
       </>
 
