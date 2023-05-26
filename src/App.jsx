@@ -22,7 +22,7 @@ const initialStateTodos = [
       },
       {
          id: 3,
-         title : 'todo 01',
+         title : 'todo 03',
          description: 'descripcion 03',
          state: false,
          priority: true,
@@ -33,13 +33,17 @@ const initialStateTodos = [
 const App = () =>{
 
   const [todos, setTodos] = useState(initialStateTodos);
+  
+  const addTodo = (todo) => {
+      setTodos([...todos, todo])
 
+  };
   return (
 
       < >
       <div className="container mb-2">
       <h1 className="my-5">To Do List</h1>
-      <TodoForm />
+      <TodoForm addTodo ={addTodo} />
       <Todos todos = {todos} />
       </div>
       </>

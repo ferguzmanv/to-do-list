@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import { useState } from "react";
 
-const TodoForm = () => {
+const TodoForm = ({addTodo}) => {
      //objeto, se iniciatiza aca y se cativa con los "todos"
     const [todo, setTodo] = useState({
 
@@ -17,20 +17,34 @@ const TodoForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(title.trim() === ''|| description.trim() === ''){
-            
-            Swal.fire({
+         
+            return Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong!'
+                text: 'Something TODO went wrong!'
                 
-              })
-
+              });
+          
         }
 
+        addTodo({
+            id: Date.now(),
+            ...todo,
+            state: state === 'completado' 
 
+        })
 
+         console.log(title,description, state);
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Your TODO work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        
         // console.log(todo.title, todo.description, todo.state);
-        console.log(todo.title, todo.description, todo.state, todo.priority);
+        // console.log(todo.title, todo.description, todo.state, todo.priority);
     };
 
     const handleChange = e => {
@@ -75,7 +89,6 @@ const TodoForm = () => {
 
 
             <div className="form-check mb-2">
-            
             <input 
                 type="checkbox"
                 name="priority" 
