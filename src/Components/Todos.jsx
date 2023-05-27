@@ -1,11 +1,22 @@
-const Todos = ({todos}) => {
+import Todo from "./Todo";
+
+const Todos = ({todos,  deleteTodo, updateTodo}) => {
     return (
         <div>
             <h2 className="text-center">Todos</h2>
-            <ul>
+            <ul className="list-group">
                 {todos.map((todo) => (
-                            <li key={todo.id}>{todo.title}</li>
+                        <Todo
+                        key={todo.id}
+                        todo={todo}
+                        deleteTodo={deleteTodo}
+                        updateTodo ={updateTodo}
+                      />
                         ))}
+                        {todos.length === 0 && (
+                            <li className="list-group-item text-center">Sin Todos</li>
+
+                        )}
 
             </ul>
         </div>
