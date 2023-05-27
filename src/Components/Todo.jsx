@@ -1,4 +1,4 @@
-const Todo = ({ todo }) => {
+const Todo = ({ todo, deleteTodo, updateTodo }) => {
   const { title, description, state, priority } = todo;
 
   return (
@@ -9,8 +9,14 @@ const Todo = ({ todo }) => {
         </h5>
         <p>{description}</p>
         <div className="d-flex gap-2">
-          <button className="btn btn-sm btn-danger">Eliminar</button>
-          <button className="btn btn-sm btn-info">Actualizar</button>
+          <button 
+            className="btn btn-sm btn-danger"  
+            onClick={() => deleteTodo(todo.id)}
+          >Eliminar</button>
+          <button 
+          className="btn btn-sm btn-info"
+          onClick={() => updateTodo(todo.id)}
+          >Actualizar</button>
         </div>
       </div>
       <span className="badge bg-primary rounden-pill">

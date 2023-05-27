@@ -38,13 +38,49 @@ const App = () =>{
       setTodos([...todos, todo])
 
   };
+
+  const deleteTodo = (id) => {
+   const newTodos = todos.filter((todo) => todo.id !== id);
+   setTodos(newTodos);
+ };
+
+ const updateTodo = (id) => {
+   const newTodos = todos.map((todo) => {
+     if (todo.id === id) {
+       todo.state = !todo.state;
+     }
+     return todo;
+   });
+   setTodos(newTodos);
+ };
+
+ const orderTodo = (arrayTodos) => {
+   return arrayTodos.sort((a, b) => {
+     if (a.priority === b.priority) return 0;
+     if (a.priority) return -1;  
+     if (!a.priority) return 1;
+     
+   });
+ };
+ 
+//  useEffect(() => {
+//    setTodos(orderTodos(todos));
+//    console.log("useEffect");
+//  }, [todos]);
+
+
+ 
   return (
 
       < >
       <div className="container mb-2">
       <h1 className="my-5">To Do List</h1>
       <TodoForm addTodo ={addTodo} />
-      <Todos todos = {todos} />
+      <Todos 
+         todos = {orderTodo(todos)}
+         deleteTodo={deleteTodo}
+         updateTodo ={updateTodo}
+      />
     
       </div>
       </>
